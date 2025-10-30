@@ -1,9 +1,7 @@
 /**
  * Sistema de Templates JavaScript
- * Gerencia templates de páginas e renderização
+ * Gerencia templates de paginas e renderizacao
  */
-
-import { $ } from './utils.js';
 
 const templates = {
     // Template da página Home
@@ -72,38 +70,38 @@ const templates = {
                     </p>
                 </div>
                 
-                <div class="about-section">
-                    <h2>📚 Conceitos Implementados</h2>
+                    <div class="about-section">
+                    <h2>Conceitos Implementados</h2>
                     <ul style="list-style: none; padding: 0;">
                         <li style="margin: 1rem 0; padding: 1rem; background: #f3f4f6; border-radius: 8px;">
-                            <strong>🎯 SPA (Single Page Application):</strong> Sistema de roteamento que permite
-                            navegação entre páginas sem recarregar o navegador.
+                            <strong>SPA (Single Page Application):</strong> Sistema de roteamento que permite
+                            navegacao entre paginas sem recarregar o navegador.
                         </li>
                         <li style="margin: 1rem 0; padding: 1rem; background: #f3f4f6; border-radius: 8px;">
-                            <strong>📝 Sistema de Templates:</strong> Templates JavaScript para renderização
-                            dinâmica de conteúdo.
+                            <strong>Sistema de Templates:</strong> Templates JavaScript para renderizacao
+                            dinamica de conteudo.
                         </li>
                         <li style="margin: 1rem 0; padding: 1rem; background: #f3f4f6; border-radius: 8px;">
-                            <strong>✅ Validação de Formulários:</strong> Sistema completo de validação com
-                            feedback em tempo real para o usuário.
+                            <strong>Validacao de Formularios:</strong> Sistema completo de validacao com
+                            feedback em tempo real para o usuario.
                         </li>
                         <li style="margin: 1rem 0; padding: 1rem; background: #f3f4f6; border-radius: 8px;">
-                            <strong>🎨 Manipulação do DOM:</strong> Criação e modificação de elementos
+                            <strong>Manipulacao do DOM:</strong> Criacao e modificacao de elementos
                             dinamicamente.
                         </li>
                         <li style="margin: 1rem 0; padding: 1rem; background: #f3f4f6; border-radius: 8px;">
-                            <strong>💾 LocalStorage:</strong> Armazenamento de dados no navegador do usuário.
+                            <strong>LocalStorage:</strong> Armazenamento de dados no navegador do usuario.
                         </li>
                     </ul>
                 </div>
                 
                 <div class="about-section">
-                    <h2>🔧 Tecnologias Utilizadas</h2>
+                    <h2>Tecnologias Utilizadas</h2>
                     <p>
-                        <strong>HTML5:</strong> Estrutura semântica<br>
-                        <strong>CSS3:</strong> Estilização moderna com variáveis CSS e Flexbox/Grid<br>
-                        <strong>JavaScript ES6+:</strong> Módulos, Arrow Functions, Template Literals<br>
-                        <strong>LocalStorage API:</strong> Persistência de dados<br>
+                        <strong>HTML5:</strong> Estrutura semantica<br>
+                        <strong>CSS3:</strong> Estilizacao moderna com variaveis CSS e Flexbox/Grid<br>
+                        <strong>JavaScript ES6+:</strong> Arrow Functions, Template Literals<br>
+                        <strong>LocalStorage API:</strong> Persistencia de dados<br>
                     </p>
                 </div>
             </div>
@@ -114,11 +112,11 @@ const templates = {
     contato: `
         <div class="page-content">
             <div class="container">
-                <h1 class="text-center mb-3">📧 Entre em Contato</h1>
+                <h1 class="text-center mb-3">Entre em Contato</h1>
                 
                 <div class="form-container">
                     <div id="contact-success" class="success-message">
-                        Mensagem enviada com sucesso! 🎉
+                        Mensagem enviada com sucesso!
                     </div>
                     
                     <form id="contact-form">
@@ -171,11 +169,11 @@ const templates = {
     cadastro: `
         <div class="page-content">
             <div class="container">
-                <h1 class="text-center mb-3">👤 Cadastro de Usuário</h1>
+                <h1 class="text-center mb-3">Cadastro de Usuario</h1>
                 
                 <div class="form-container">
                     <div id="register-success" class="success-message">
-                        Cadastro realizado com sucesso! 🎉
+                        Cadastro realizado com sucesso!
                     </div>
                     
                     <form id="register-form">
@@ -228,7 +226,7 @@ const templates = {
     produtos: `
         <div class="page-content">
             <div class="container">
-                <h1 class="text-center mb-3">🛍️ Nossos Produtos</h1>
+                <h1 class="text-center mb-3">Nossos Produtos</h1>
                 
                 <div class="produtos-grid" id="produtos-grid">
                     <!-- Produtos serão carregados dinamicamente via JavaScript -->
@@ -261,4 +259,7 @@ const renderTemplate = (templateName) => {
     return templates.home; // fallback
 };
 
-export { templates, renderTemplate };
+// Exportar para uso global (sem ES modules)
+window.templates = templates;
+window.renderTemplate = renderTemplate;
+window.Templates = { templates, renderTemplate };
