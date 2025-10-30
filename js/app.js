@@ -1,12 +1,9 @@
 /**
- * Arquivo Principal da Aplicação
+ * Arquivo Principal da Aplicacao
  * Inicializa o SPA e configura todas as funcionalidades
  */
 
-import router from './router.js';
-import { $, toggleClass } from './utils.js';
-
-// Agregar showAlert globalmente para uso nos templates
+// Funcao showAlert global para uso nos templates
 window.showAlert = function(message, type = 'info') {
     const alertBox = document.createElement('div');
     alertBox.style.cssText = `
@@ -31,30 +28,39 @@ window.showAlert = function(message, type = 'info') {
     }, 3000);
 };
 
-// Inicializar aplicação quando DOM estiver pronto
+// Inicializar aplicacao quando DOM estiver pronto
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 Aplicação iniciada com sucesso!');
+    console.log('Aplicacao iniciada com sucesso!');
     
-    // Inicializar router
-    router.init();
-    
-    // Configurar menu hambúrguer
-    setupMobileMenu();
-    
-    // Adicionar animações CSS dinamicamente
-    addAnimations();
+    // Aguardar scripts carregarem antes de inicializar router
+    setTimeout(() => {
+        if (window.Router) {
+            window.Router.init();
+        }
+        
+        // Configurar menu hamburguer
+        setupMobileMenu();
+        
+        // Adicionar animacoes CSS dinamicamente
+        addAnimations();
+    }, 100);
 });
 
-// Configurar menu mobile (hambúrguer)
+// Configurar menu mobile (hamburguer)
 const setupMobileMenu = () => {
-    const hamburger = $('#hamburger');
-    const navMenu = $('#nav-menu');
+    const hamburger = window.$('#hamburger');
+    const navMenu = window.$('#nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
     
     if (hamburger && navMenu) {
         hamburger.addEventListener('click', () => {
-            toggleClass(hamburger, 'active');
-            toggleClass(navMenu, 'active');
+            if (window.toggleClass) {
+                window.toggleClass(hamburger, 'active');
+                window.toggleClass(navMenu, 'active');
+            } else {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            }
         });
         
         // Fechar menu ao clicar em um link
@@ -104,11 +110,11 @@ const addAnimations = () => {
     document.head.appendChild(style);
 };
 
-// Função para demonstrar armazenamento local
+// Funcao para demonstrar armazenamento local
 const demoLocalStorage = () => {
     // Exemplo de uso do localStorage
     const dadosExemplo = {
-        nome: 'Usuário',
+        nome: 'Usuario',
         visitas: parseInt(localStorage.getItem('visitas') || '0') + 1,
         ultimaVisita: new Date().toISOString()
     };
@@ -116,7 +122,7 @@ const demoLocalStorage = () => {
     localStorage.setItem('visitas', dadosExemplo.visitas);
     localStorage.setItem('ultimaVisita', dadosExemplo.ultimaVisita);
     
-    console.log('📊 Estatísticas:', dadosExemplo);
+    console.log('Estatisticas:', dadosExemplo);
 };
 
 // Executar demos
