@@ -1,11 +1,7 @@
 /**
  * Sistema de Roteamento SPA (Single Page Application)
- * Gerencia navegação entre páginas sem recarregar
+ * Gerencia navegacao entre paginas sem recarregar
  */
-
-import { $ } from './utils.js';
-import { templates, renderTemplate } from './templates.js';
-import { setupFormValidation } from './validators.js';
 
 class Router {
     constructor() {
@@ -23,10 +19,16 @@ class Router {
     
     // Inicializar o roteador
     init() {
+        // Carregar rota inicial
+        if (!window.location.hash || window.location.hash === '#') {
+            window.location.hash = '#/';
+        }
         this.handleRoute();
+        
+        // Escutar mudancas de hash
         window.addEventListener('hashchange', () => this.handleRoute());
         
-        // Configurar links de navegação
+        // Configurar links de navegacao
         this.setupNavLinks();
     }
     
@@ -42,16 +44,22 @@ class Router {
         }
     }
     
-    // Renderizar página
+    // Renderizar pagina
     renderPage(route) {
-        const mainContent = $('#main-content');
+        const mainContent = window.$('#main-content');
         
         if (!mainContent) return;
         
         // Renderizar template
-        mainContent.innerHTML = renderTemplate(route);
+        if (window.renderTemplate) {
+            mainContent.innerHTML = window.renderTemplate(route);
+        } else if (window.templates && window.templates[route]) {
+            mainContent.innerHTML = window.templates[route];
+        } else {
+            console.error('Template nao encontrado para:', route);
+        }
         
-        // Configurar funcionalidades específicas da página
+        // Configurar funcionalidades especificas da pagina
         this.setupPageFeatures(route);
     }
     
@@ -70,22 +78,24 @@ class Router {
         }
     }
     
-    // Configurar formulário de contato
+    // Configurar formulario de contato
     setupContactForm() {
-        const contactForm = $('#contact-form');
-        if (contactForm) {
-            setupFormValidation(contactForm);
+        const contactForm = window.$('#contact-form');
+        if (contactForm && window.Validators && window.Validators.setupFormValidation) {
+            window.Validators.setupFormValidation(contactForm);
         }
     }
     
-    // Configurar formulário de cadastro
+    // Configurar formulario de cadastro
     setupRegisterForm() {
-        const registerForm = $('#register-form');
+        const registerForm = window.$('#register-form');
         if (registerForm) {
-            setupFormValidation(registerForm);
+            if (window.Validators && window.Validators.setupFormValidation) {
+                window.Validators.setupFormValidation(registerForm);
+            }
             
-            // Máscara para CPF
-            const cpfInput = $('#reg-cpf');
+            // Mascara para CPF
+            const cpfInput = window.$('#reg-cpf');
             if (cpfInput) {
                 cpfInput.addEventListener('input', (e) => {
                     let value = e.target.value.replace(/\D/g, '');
@@ -98,8 +108,8 @@ class Router {
                 });
             }
             
-            // Máscara para telefone
-            const phoneInput = $('#reg-phone');
+            // Mascara para telefone
+            const phoneInput = window.$('#reg-phone');
             if (phoneInput) {
                 phoneInput.addEventListener('input', (e) => {
                     let value = e.target.value.replace(/\D/g, '');
@@ -115,19 +125,19 @@ class Router {
     
     // Carregar produtos
     loadProducts() {
-        const produtosGrid = $('#produtos-grid');
+        const produtosGrid = window.$('#produtos-grid');
         if (!produtosGrid) return;
         
         // Produtos de exemplo
         const produtos = [
-            { emoji: '📱', nome: 'Smartphone Pro', descricao: 'Último lançamento tecnológico', preco: 'R$ 2.999,90' },
-            { emoji: '💻', nome: 'Notebook Ultra', descricao: 'Alto desempenho para trabalho', preco: 'R$ 4.599,90' },
-            { emoji: '🎧', nome: 'Fones Bluetooth', descricao: 'Qualidade de som premium', preco: 'R$ 399,90' },
-            { emoji: '⌚', nome: 'Smartwatch Elite', descricao: 'Tecnologia de ponta no seu pulso', preco: 'R$ 899,90' },
-            { emoji: '📷', nome: 'Câmera Digital', descricao: 'Captura momentos especiais', preco: 'R$ 1.599,90' },
-            { emoji: '🎮', nome: 'Console Gamer', descricao: 'Diversão garantida', preco: 'R$ 2.899,90' },
-            { emoji: '🔊', nome: 'Soundbar', descricao: 'Experiência imersiva de áudio', preco: 'R$ 699,90' },
-            { emoji: '⌨️', nome: 'Teclado Mecânico', descricao: 'Precisão e conforto', preco: 'R$ 299,90' }
+            { emoji: 'Celular', nome: 'Smartphone Pro', descricao: 'Ultimo lancamento tecnologico', preco: 'R$ 2.999,90' },
+            { emoji: 'Notebook', nome: 'Notebook Ultra', descricao: 'Alto desempenho para trabalho', preco: 'R$ 4.599,90' },
+            { emoji: 'Fones', nome: 'Fones Bluetooth', descricao: 'Qualidade de som premium', preco: 'R$ 399,90' },
+            { emoji: 'Relogio', nome: 'Smartwatch Elite', descricao: 'Tecnologia de ponta no seu pulso', preco: 'R$ 899,90' },
+            { emoji: 'Camera', nome: 'Camera Digital', descricao: 'Captura momentos especiais', preco: 'R$ 1.599,90' },
+            { emoji: 'Console', nome: 'Console Gamer', descricao: 'Diversao garantida', preco: 'R$ 2.899,90' },
+            { emoji: 'Som', nome: 'Soundbar', descricao: 'Experiencia imersiva de audio', preco: 'R$ 699,90' },
+            { emoji: 'Teclado', nome: 'Teclado Mecanico', descricao: 'Precisao e conforto', preco: 'R$ 299,90' }
         ];
         
         produtosGrid.innerHTML = produtos.map(produto => `
@@ -137,7 +147,7 @@ class Router {
                     <h3>${produto.nome}</h3>
                     <p>${produto.descricao}</p>
                     <div class="produto-price">${produto.preco}</div>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="showAlert('${produto.nome} adicionado ao carrinho!', 'success')">
+                    <button class="btn btn-primary" style="width: 100%;" onclick="if(window.showAlert) window.showAlert('${produto.nome} adicionado ao carrinho!', 'success')">
                         Comprar
                     </button>
                 </div>
@@ -156,8 +166,8 @@ class Router {
             });
         });
         
-        // Logo também navega
-        const logo = $('.logo h1');
+        // Logo tambem navega
+        const logo = window.$('.logo h1');
         if (logo) {
             logo.addEventListener('click', () => {
                 this.navigateTo('/');
@@ -184,6 +194,5 @@ class Router {
     }
 }
 
-// Exportar instância do router
-const router = new Router();
-export default router;
+// Exportar instancia do router (sem ES modules)
+window.Router = new Router();
