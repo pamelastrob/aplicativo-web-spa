@@ -42,7 +42,11 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script type="module" src="js/app.js"></script>
+    <!-- Scripts - Ordem importante: utils primeiro, depois templates, validators, router, e por ultimo app -->
+    <script src="js/utils.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="js/validators.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
