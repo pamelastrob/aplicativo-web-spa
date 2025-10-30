@@ -124,7 +124,8 @@ const clearFormErrors = (formElement) => {
     });
 };
 
-export {
+// Exportar para uso global (sem ES modules)
+window.Utils = {
     toggleElement,
     addClass,
     removeClass,
@@ -139,3 +140,9 @@ export {
     showAlert,
     clearFormErrors
 };
+
+// Disponibilizar funcoes mais usadas globalmente
+window.$ = $;
+window.$$ = $$;
+window.showAlert = showAlert;
+window.toggleClass = toggleClass;
