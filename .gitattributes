@@ -1,0 +1,17 @@
+# Configuração de codificação UTF-8 para todos os arquivos de texto
+* text=auto eol=lf
+
+# JavaScript
+*.js text eol=lf charset=utf-8
+
+# HTML
+*.html text eol=lf charset=utf-8
+
+# CSS
+*.css text eol=lf charset=utf-8
+
+# Markdown
+*.md text eol=lf charset=utf-8
+
+# Arquivos JSON
+*.json text eol=lf charset=utf-8
