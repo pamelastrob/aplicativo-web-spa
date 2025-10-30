@@ -1,9 +1,7 @@
 /**
- * Sistema de Validação de Formulários
- * Validação em tempo real com feedback ao usuário
+ * Sistema de Validacao de Formularios
+ * Validacao em tempo real com feedback ao usuario
  */
-
-import { showAlert, $ } from './utils.js';
 
 // Regras de validação
 const validators = {
@@ -211,7 +209,7 @@ const setupFormValidation = (formElement) => {
         });
         
         if (isValid) {
-            // Formulário válido - processar dados
+            // Formulario valido - processar dados
             const formData = new FormData(formElement);
             const data = Object.fromEntries(formData);
             
@@ -224,21 +222,26 @@ const setupFormValidation = (formElement) => {
                 }, 5000);
             }
             
-            // Limpar formulário
+            // Limpar formulario
             formElement.reset();
             
             // Mostrar alerta
-            showAlert('Formulário enviado com sucesso!', 'success');
+            if (window.showAlert) {
+                window.showAlert('Formulario enviado com sucesso!', 'success');
+            }
             
-            console.log('Dados do formulário:', data);
+            console.log('Dados do formulario:', data);
             
-            // Aqui você pode fazer uma requisição AJAX para enviar os dados
+            // Aqui voce pode fazer uma requisicao AJAX para enviar os dados
             // fetch('/api/endpoint', { method: 'POST', body: JSON.stringify(data) })
         } else {
             // Mostrar alerta de erro
-            showAlert('Por favor, corrija os erros no formulário', 'error');
+            if (window.showAlert) {
+                window.showAlert('Por favor, corrija os erros no formulario', 'error');
+            }
         }
     });
 };
 
-export { validateField, setupFormValidation, validators };
+// Exportar para uso global (sem ES modules)
+window.Validators = { validateField, setupFormValidation, validators };
