@@ -1,9 +1,5 @@
-/**
- * Arquivo Principal da Aplicacao
- * Inicializa o SPA e configura todas as funcionalidades
- */
-
-// Funcao showAlert global para uso nos templates
+// Arquivo Principal da Aplicacao
+// Desenvolvido por: Pamela Strob Mancegozo Lima
 window.showAlert = function(message, type = 'info') {
     const alertBox = document.createElement('div');
     alertBox.style.cssText = `
@@ -28,22 +24,15 @@ window.showAlert = function(message, type = 'info') {
     }, 3000);
 };
 
-// Inicializar aplicacao quando DOM estiver pronto
+// Inicializar aplicacao
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Aplicacao iniciada com sucesso!');
-    
-    // Aguardar scripts carregarem antes de inicializar router
     setTimeout(() => {
         if (window.Router) {
             window.Router.init();
         }
-        
-        // Configurar menu hamburguer
         setupMobileMenu();
-        
-        // Adicionar animacoes CSS dinamicamente
         addAnimations();
-    }, 100);
+    }, 200);
 });
 
 // Configurar menu mobile (hamburguer)
