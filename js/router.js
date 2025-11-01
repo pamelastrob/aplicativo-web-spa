@@ -1,7 +1,5 @@
-/**
- * Sistema de Roteamento SPA (Single Page Application)
- * Gerencia navegacao entre paginas sem recarregar
- */
+// Sistema de Roteamento SPA
+// Desenvolvido por: Pamela Strob Mancegozo Lima
 
 class Router {
     constructor() {
@@ -19,36 +17,52 @@ class Router {
     
     // Inicializar o roteador
     init() {
-        // Carregar rota inicial
-        if (!window.location.hash || window.location.hash === '#') {
+        // Carregar rota inicial - garantir que sempre haja um hash
+        if (!window.location.hash || window.location.hash === '#' || window.location.hash === '') {
             window.location.hash = '#/';
         }
+        
+        // Configurar links de navegacao PRIMEIRO
+        this.setupNavLinks();
+        
+        // Carregar rota atual
         this.handleRoute();
         
         // Escutar mudancas de hash
-        window.addEventListener('hashchange', () => this.handleRoute());
+        window.addEventListener('hashchange', () => {
+            this.handleRoute();
+        });
         
-        // Configurar links de navegacao
-        this.setupNavLinks();
+        // Forcar carregamento inicial apos um pequeno delay
+        setTimeout(() => {
+            if (document.getElementById('main-content').innerHTML.trim() === '') {
+                this.handleRoute();
+            }
+        }, 100);
     }
     
-    // Lidar com mudança de rota
+    // Lidar com mudanca de rota
     handleRoute() {
-        const hash = window.location.hash.slice(1) || '/';
+        let hash = window.location.hash.slice(1);
+        if (!hash || hash === '') {
+            hash = '/';
+        }
         const route = this.routes[hash] || 'home';
         
-        if (this.currentRoute !== route) {
-            this.currentRoute = route;
-            this.renderPage(route);
-            this.updateActiveNavLink(hash);
-        }
+        // Sempre renderizar, mesmo se for a mesma rota (para garantir carregamento inicial)
+        this.currentRoute = route;
+        this.renderPage(route);
+        this.updateActiveNavLink(hash);
     }
     
     // Renderizar pagina
     renderPage(route) {
         const mainContent = window.$('#main-content');
         
-        if (!mainContent) return;
+        if (!mainContent) {
+            console.error('Elemento main-content nao encontrado');
+            return;
+        }
         
         // Renderizar template
         if (window.renderTemplate) {
@@ -57,10 +71,17 @@ class Router {
             mainContent.innerHTML = window.templates[route];
         } else {
             console.error('Template nao encontrado para:', route);
+            // Fallback para home
+            if (window.templates && window.templates.home) {
+                mainContent.innerHTML = window.templates.home;
+            }
+            return;
         }
         
         // Configurar funcionalidades especificas da pagina
-        this.setupPageFeatures(route);
+        setTimeout(() => {
+            this.setupPageFeatures(route);
+        }, 50);
     }
     
     // Configurar funcionalidades específicas de cada página
@@ -130,19 +151,18 @@ class Router {
         
         // Produtos de exemplo
         const produtos = [
-            { emoji: 'Celular', nome: 'Smartphone Pro', descricao: 'Ultimo lancamento tecnologico', preco: 'R$ 2.999,90' },
-            { emoji: 'Notebook', nome: 'Notebook Ultra', descricao: 'Alto desempenho para trabalho', preco: 'R$ 4.599,90' },
-            { emoji: 'Fones', nome: 'Fones Bluetooth', descricao: 'Qualidade de som premium', preco: 'R$ 399,90' },
-            { emoji: 'Relogio', nome: 'Smartwatch Elite', descricao: 'Tecnologia de ponta no seu pulso', preco: 'R$ 899,90' },
-            { emoji: 'Camera', nome: 'Camera Digital', descricao: 'Captura momentos especiais', preco: 'R$ 1.599,90' },
-            { emoji: 'Console', nome: 'Console Gamer', descricao: 'Diversao garantida', preco: 'R$ 2.899,90' },
-            { emoji: 'Som', nome: 'Soundbar', descricao: 'Experiencia imersiva de audio', preco: 'R$ 699,90' },
-            { emoji: 'Teclado', nome: 'Teclado Mecanico', descricao: 'Precisao e conforto', preco: 'R$ 299,90' }
+            { nome: 'Smartphone Pro', descricao: 'Ultimo lancamento tecnologico', preco: 'R$ 2.999,90' },
+            { nome: 'Notebook Ultra', descricao: 'Alto desempenho para trabalho', preco: 'R$ 4.599,90' },
+            { nome: 'Fones Bluetooth', descricao: 'Qualidade de som premium', preco: 'R$ 399,90' },
+            { nome: 'Smartwatch Elite', descricao: 'Tecnologia de ponta no seu pulso', preco: 'R$ 899,90' },
+            { nome: 'Camera Digital', descricao: 'Captura momentos especiais', preco: 'R$ 1.599,90' },
+            { nome: 'Console Gamer', descricao: 'Diversao garantida', preco: 'R$ 2.899,90' },
+            { nome: 'Soundbar', descricao: 'Experiencia imersiva de audio', preco: 'R$ 699,90' },
+            { nome: 'Teclado Mecanico', descricao: 'Precisao e conforto', preco: 'R$ 299,90' }
         ];
         
         produtosGrid.innerHTML = produtos.map(produto => `
             <div class="produto-card">
-                <div class="produto-image">${produto.emoji}</div>
                 <div class="produto-content">
                     <h3>${produto.nome}</h3>
                     <p>${produto.descricao}</p>
