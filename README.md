@@ -2,7 +2,7 @@
 
 Desenvolvido por: Pamela Strob Mancegozo Lima
 
-Aplicacao web desenvolvida como projeto academico para demonstrar conceitos de JavaScript, incluindo Single Page Application (SPA), manipulacao do DOM, sistema de templates e validacao de formularios.
+Aplicacao web desenvolvida como projeto academico demonstrando conceitos de JavaScript: Single Page Application (SPA), manipulacao do DOM, sistema de templates e validacao de formularios.
 
 ## Descricao
 
@@ -168,6 +168,13 @@ Cada arquivo JavaScript tem uma responsabilidade especifica:
 - Hover effects
 
 ### Forma de Entrega
+
+### Estrutura de Pastas
+- Estrutura de pastas organizada (pastas, HTML, imagens, CSS e JS)
+- Codigos organizados por funcionalidade em arquivos separados
+- Pasta js/ com todos os arquivos JavaScript modulares
+
+### Link Publico do GitHub
 - Link PUBLICO do projeto no GitHub: https://github.com/pamelastrob/aplicativo-web-spa
 - Codigo fonte e arquivos HTML, imagens e CSS organizados em pastas
 - Pasta js/ com todos os arquivos JavaScript modulares
@@ -177,3 +184,12 @@ Cada arquivo JavaScript tem uma responsabilidade especifica:
 Pamela Strob Mancegozo Lima
 
 Desenvolvido como parte da atividade Experiencias Praticas - Programacao para Interfaces Web Entrega III - Interatividade e Funcionalidades.
+
+---
+
+Este projeto demonstra conhecimento de JavaScript moderno, incluindo:
+- Single Page Application (SPA)
+- Sistema de templates JavaScript
+- Manipulacao do DOM
+- Validacao de formularios com feedback ao usuario
+- Estrutura modular de codigo
