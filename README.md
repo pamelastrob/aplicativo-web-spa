@@ -1,5 +1,7 @@
 # Aplicativo Web Interativo - SPA
 
+Desenvolvido por: Pamela Strob Mancegozo Lima
+
 Aplicacao web desenvolvida como projeto academico para demonstrar conceitos de JavaScript, incluindo Single Page Application (SPA), manipulacao do DOM, sistema de templates e validacao de formularios.
 
 ## Descricao
@@ -68,36 +70,15 @@ Trabalho3/
 
 ## Como Usar
 
-### Opcao 1: Abrir Localmente
-
 1. Clone ou baixe este repositorio
-2. Abra o arquivo index.html em um navegador moderno
-3. Use um servidor local (Live Server, VS Code) devido ao uso de modulos ES6
-
-### Opcao 2: Servidor Local
-
-```bash
-# Com Python
-python -m http.server 8000
-
-# Com Node.js
-npx http-server
-
-# Com PHP
-php -S localhost:8000
-```
-
-Depois acesse: http://localhost:8000
+2. Abra o arquivo index.html diretamente em um navegador moderno
+3. A aplicacao funciona sem necessidade de servidor local
 
 ## Tecnologias Utilizadas
 
 - HTML5: Estrutura semantica
-- CSS3: Estilizacao com Flexbox/Grid e variaveis CSS
-- JavaScript ES6: 
-  - Modulos ES6
-  - Arrow Functions
-  - Template Literals
-  - Classes
+- CSS3: Estilizacao com Flexbox/Grid
+- JavaScript: Arrow Functions, Template Literals, Classes
 - LocalStorage API: Armazenamento de dados no navegador
 
 ## Funcionalidades Detalhadas
@@ -186,20 +167,13 @@ Cada arquivo JavaScript tem uma responsabilidade especifica:
 - Animacoes em cards
 - Hover effects
 
-## Conceitos Academicos Demonstrados
+### Forma de Entrega
+- Link PUBLICO do projeto no GitHub: https://github.com/pamelastrob/aplicativo-web-spa
+- Codigo fonte e arquivos HTML, imagens e CSS organizados em pastas
+- Pasta js/ com todos os arquivos JavaScript modulares
 
-1. Manipulacao do DOM - Criacao e modificacao dinamica de elementos
-2. Event Listeners - Captura e tratamento de eventos
-3. Template Literals - Construcao de HTML dinamicamente
-4. LocalStorage API - Armazenamento de dados
-5. SPA Architecture - Roteamento e navegacao sem recarregar
-6. Form Validation - Validacao de dados do cliente
-7. Responsive Design - Layout adaptavel
+## Desenvolvedor
 
-## Licenca
+Pamela Strob Mancegozo Lima
 
-Este projeto foi desenvolvido para fins academicos.
-
----
-
-Desenvolvido para o curso de Programacao para Interfaces Web
+Desenvolvido como parte da atividade Experiencias Praticas - Programacao para Interfaces Web Entrega III - Interatividade e Funcionalidades.
