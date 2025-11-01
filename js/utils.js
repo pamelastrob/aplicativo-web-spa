@@ -1,40 +1,39 @@
-/**
- * Utilitários e Funções Auxiliares
- */
+// Utilitarios e Funcoes Auxiliares
+// Desenvolvido por: Pamela Strob Mancegozo Lima
 
-// Função para mostrar/esconder elementos
+// Mostrar/esconder elementos
 const toggleElement = (element, show = true) => {
     if (element) {
         element.style.display = show ? 'block' : 'none';
     }
 };
 
-// Função para adicionar classe
+// Adicionar classe
 const addClass = (element, className) => {
     if (element && !element.classList.contains(className)) {
         element.classList.add(className);
     }
 };
 
-// Função para remover classe
+// Remover classe
 const removeClass = (element, className) => {
     if (element) {
         element.classList.remove(className);
     }
 };
 
-// Função para alternar classe
+// Alternar classe
 const toggleClass = (element, className) => {
     if (element) {
         element.classList.toggle(className);
     }
 };
 
-// Função para buscar elementos
+// Buscar elementos
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => document.querySelectorAll(selector);
 
-// Função para criar elemento
+// Criar elemento
 const createElement = (tag, classes = '', content = '') => {
     const element = document.createElement(tag);
     if (classes) element.className = classes;
@@ -42,7 +41,7 @@ const createElement = (tag, classes = '', content = '') => {
     return element;
 };
 
-// Função para obter dados do localStorage
+// Obter dados do localStorage
 const getStorage = (key) => {
     try {
         const data = localStorage.getItem(key);
