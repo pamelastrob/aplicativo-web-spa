@@ -1,10 +1,8 @@
-/**
- * Sistema de Templates JavaScript
- * Gerencia templates de paginas e renderizacao
- */
+// Sistema de Templates JavaScript
+// Desenvolvido por: Pamela Strob Mancegozo Lima
 
 const templates = {
-    // Template da página Home
+    // Template Home
     home: `
         <div class="page-content">
             <div class="hero">
@@ -57,7 +55,7 @@ const templates = {
         </div>
     `,
     
-    // Template da página Sobre
+    // Template Sobre
     sobre: `
         <div class="page-content">
             <div class="container">
@@ -108,7 +106,7 @@ const templates = {
         </div>
     `,
     
-    // Template da página Contato
+    // Template Contato
     contato: `
         <div class="page-content">
             <div class="container">
@@ -165,7 +163,7 @@ const templates = {
         </div>
     `,
     
-    // Template da página Cadastro
+    // Template Cadastro
     cadastro: `
         <div class="page-content">
             <div class="container">
@@ -222,7 +220,7 @@ const templates = {
         </div>
     `,
     
-    // Template da página Produtos
+    // Template Produtos
     produtos: `
         <div class="page-content">
             <div class="container">
@@ -235,10 +233,9 @@ const templates = {
         </div>
     `,
     
-    // Template de produto individual
+    // Template de produto
     produtoCard: (produto) => `
         <div class="produto-card">
-            <div class="produto-image">${produto.emoji}</div>
             <div class="produto-content">
                 <h3>${produto.nome}</h3>
                 <p>${produto.descricao}</p>
@@ -251,7 +248,7 @@ const templates = {
     `
 };
 
-// Função para renderizar template
+// Renderizar template
 const renderTemplate = (templateName) => {
     if (templates[templateName]) {
         return templates[templateName];
@@ -259,7 +256,7 @@ const renderTemplate = (templateName) => {
     return templates.home; // fallback
 };
 
-// Exportar para uso global (sem ES modules)
+// Exportar para uso global
 window.templates = templates;
 window.renderTemplate = renderTemplate;
 window.Templates = { templates, renderTemplate };
