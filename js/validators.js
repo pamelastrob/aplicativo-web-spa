@@ -1,11 +1,6 @@
-/**
- * Sistema de Validacao de Formularios
- * Validacao em tempo real com feedback ao usuario
- */
-
-// Regras de validação
+// Sistema de Validacao de Formularios
+// Desenvolvido por: Pamela Strob Mancegozo Lima
 const validators = {
-    // Validação de nome
     name: (value) => {
         if (!value || value.trim().length < 3) {
             return 'Nome deve ter pelo menos 3 caracteres';
@@ -16,7 +11,6 @@ const validators = {
         return null;
     },
     
-    // Validação de email
     email: (value) => {
         if (!value) {
             return 'E-mail é obrigatório';
@@ -28,7 +22,6 @@ const validators = {
         return null;
     },
     
-    // Validação de telefone
     phone: (value) => {
         if (!value) {
             return 'Telefone é obrigatório';
@@ -41,7 +34,6 @@ const validators = {
         return null;
     },
     
-    // Validação de CPF
     cpf: (value) => {
         if (!value) {
             return 'CPF é obrigatório';
@@ -80,7 +72,6 @@ const validators = {
         return null;
     },
     
-    // Validação de senha
     password: (value) => {
         if (!value) {
             return 'Senha é obrigatória';
@@ -100,7 +91,6 @@ const validators = {
         return null;
     },
     
-    // Validação de confirmação de senha
     confirmPassword: (value, form) => {
         const password = form.querySelector('[name="password"]');
         if (!password) return null;
@@ -110,7 +100,6 @@ const validators = {
         return null;
     },
     
-    // Validação de mensagem
     message: (value) => {
         if (!value || value.trim().length < 10) {
             return 'Mensagem deve ter pelo menos 10 caracteres';
@@ -121,7 +110,6 @@ const validators = {
         return null;
     },
     
-    // Validação de assunto
     subject: (value) => {
         if (!value) {
             return 'Assunto é obrigatório';
@@ -129,7 +117,6 @@ const validators = {
         return null;
     },
     
-    // Validação genérica de obrigatório
     required: (value, fieldName) => {
         if (!value || value.trim().length === 0) {
             return `${fieldName} é obrigatório`;
@@ -138,21 +125,21 @@ const validators = {
     }
 };
 
-// Função para exibir erro em um campo
+// Exibir erro em um campo
 const showFieldError = (inputElement, errorElement, message) => {
     inputElement.classList.add('error');
     errorElement.textContent = message;
     errorElement.classList.add('show');
 };
 
-// Função para remover erro de um campo
+// Remover erro de um campo
 const clearFieldError = (inputElement, errorElement) => {
     inputElement.classList.remove('error');
     errorElement.classList.remove('show');
     errorElement.textContent = '';
 };
 
-// Função para validar um campo específico
+// Validar um campo especifico
 const validateField = (inputElement, fieldName) => {
     const value = inputElement.value;
     const errorElement = document.getElementById(`${fieldName}-error`);
@@ -243,5 +230,5 @@ const setupFormValidation = (formElement) => {
     });
 };
 
-// Exportar para uso global (sem ES modules)
+// Exportar para uso global
 window.Validators = { validateField, setupFormValidation, validators };
